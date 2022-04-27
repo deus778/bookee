@@ -64,11 +64,4 @@ class Start(
 		val foundBook = bookRepository.findAll()
 		println(foundBook[0].publisher)
 	}
-
-	@PostConstruct
-	@Order(1)
-	fun testFilter() {
-		val foundBooks = bookRepository.findByTitleContains("Harry")
-		println(foundBooks)
-	}
 }
