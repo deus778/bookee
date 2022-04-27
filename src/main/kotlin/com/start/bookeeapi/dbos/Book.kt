@@ -13,12 +13,23 @@ data class Book(
     @Column(name = "summary")
     val summary: String,
     @Column(name = "isbn", unique = true)
-    val isbn: String,
-    @ManyToMany(cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
+    val isbn: String, // ISBN's have the length of 10, if assigned before 2007, and a length of 13, if assigned after 1. January 2007
+    @Column(name = "genres")
+    val genres: String,
+    @Column(name = "language")
+    val language: String,
+    @Column(name = "pages")
+    val pageCount: Int,
+    @OneToOne(cascade = [CascadeType.PERSIST, CascadeType.MERGE], fetch = FetchType.EAGER)
+    val publisher: Publisher,
+    @ManyToMany(cascade = [CascadeType.PERSIST, CascadeType.MERGE], fetch = FetchType.LAZY)
     @JoinTable(
-        name = "book_publishers",
+        name = "book_authors",
         joinColumns = [JoinColumn(name = "book_id")],
-        inverseJoinColumns = [JoinColumn(name = "publisher_id")]
+        inverseJoinColumns = [JoinColumn(name = "author_id")]
     )
-    val publishers: Set<Publisher>,
+    val authors: Set<Author>,
+    @OneToMany(fetch = FetchType.LAZY, cascade = [CascadeType.MERGE, CascadeType.PERSIST])
+    val translations: Set<Book>? = null,
+    // TODO add link to thumbnails or images - DOMAIN + UUID + _COUNT
 )
