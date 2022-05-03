@@ -29,3 +29,5 @@ enum class Genres(val genre: String) {
     SCIENCE("Science"),
     TECHNOLOGY("Technology")
 }
+
+fun List<Genres>.getGenreByString(genre: String) = this.first { enumGenre -> enumGenre.genre == genre }.name

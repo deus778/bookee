@@ -20,4 +20,9 @@ class BookController(
     fun getBook(@PathVariable id: UUID): Book {
         return bookService.getById(id)
     }
+
+    @PostMapping(path = ["/create"])
+    fun createBook(@RequestBody body: Book): Book {
+        return bookService.createBook(body)
+    }
 }

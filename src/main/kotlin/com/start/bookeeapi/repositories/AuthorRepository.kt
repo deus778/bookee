@@ -8,4 +8,5 @@ import java.util.*
 @Repository
 interface AuthorRepository : JpaRepository<Author, UUID> {
 
+    fun findAuthorByFirstNameAndLastName(firstName: String, lastName: String): Author?
 }

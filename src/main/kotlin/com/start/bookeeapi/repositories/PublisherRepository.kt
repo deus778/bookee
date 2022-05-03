@@ -7,4 +7,6 @@ import java.util.*
 
 @Repository
 interface PublisherRepository : JpaRepository<Publisher, UUID> {
+
+    fun findPublisherByNameAndCountry(name: String, country: String): Publisher?
 }
