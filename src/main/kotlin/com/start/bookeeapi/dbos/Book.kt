@@ -6,6 +6,7 @@ import javax.persistence.*
 @Entity
 @Table(name = "books")
 data class Book(
+
     @Id
     val id: UUID = UUID.randomUUID(),
     @Column(name = "title")
@@ -29,7 +30,16 @@ data class Book(
         inverseJoinColumns = [JoinColumn(name = "author_id")]
     )
     val authors: Set<Author>,
-    @OneToMany(fetch = FetchType.LAZY, cascade = [CascadeType.MERGE, CascadeType.PERSIST])
+    @OneToMany(
+        fetch = FetchType.LAZY,
+        cascade = [CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE],
+        orphanRemoval = true
+    )
+    @JoinTable(
+        name = "book_translations",
+        joinColumns = [JoinColumn(name = "book_id")],
+        inverseJoinColumns = [JoinColumn(name = "translation_id")]
+    )
     val translations: Set<Book>? = null,
     // TODO add link to thumbnails or images - DOMAIN + UUID + _COUNT
 )

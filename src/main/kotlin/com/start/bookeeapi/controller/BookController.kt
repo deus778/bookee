@@ -25,4 +25,9 @@ class BookController(
     fun createBook(@RequestBody body: Book): Book {
         return bookService.createBook(body)
     }
+
+    @DeleteMapping(path = ["/{id}/delete"])
+    fun deleteBook(@PathVariable id: UUID): Book {
+        return bookService.deleteBook(id)
+    }
 }

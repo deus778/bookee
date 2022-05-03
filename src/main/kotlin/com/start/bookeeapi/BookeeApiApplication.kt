@@ -7,10 +7,7 @@ import com.start.bookeeapi.repositories.BookRepository
 import com.start.bookeeapi.util.Genres
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
-import org.springframework.core.annotation.Order
 import org.springframework.stereotype.Service
-import javax.annotation.PostConstruct
-import javax.transaction.Transactional
 
 @SpringBootApplication
 class BookeeApiApplication
@@ -23,9 +20,9 @@ fun main(args: Array<String>) {
 class Start(
 	val bookRepository: BookRepository
 ) {
-	@PostConstruct
+/*	@PostConstruct
 	@Order(0)
-	@Transactional
+	@Transactional*/
 	fun setup() {
 		bookRepository.save(Book(
 			title = "Harry Potter and the Sorcerer's Stone",

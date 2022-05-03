@@ -41,6 +41,12 @@ class BookService(
         )
     }
 
+    fun deleteBook(id: UUID): Book {
+        val bookToDelete = bookRepository.findById(id).orElseThrow()
+        bookRepository.delete(bookToDelete)
+        return bookToDelete
+    }
+
     /**
      * This function helps in finding the already existing authors and merging them with the authors specified in the request.
      * The result will then contain new authors which need to be added to the database and authors
