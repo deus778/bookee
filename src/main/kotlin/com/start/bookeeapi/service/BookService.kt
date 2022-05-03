@@ -59,7 +59,9 @@ class BookService(
                 author.lastName
             )
         }
-        return authors.filterNot { bodyAuthor -> authorsExists.any { existingAuthor -> existingAuthor.firstName == bodyAuthor.firstName && existingAuthor.lastName == bodyAuthor.lastName } }
-            .toSet()
+        val nonExistingAuthors =
+            authors.filterNot { bodyAuthor -> authorsExists.any { existingAuthor -> existingAuthor.firstName == bodyAuthor.firstName && existingAuthor.lastName == bodyAuthor.lastName } }
+                .toSet()
+        return nonExistingAuthors.plus(authorsExists)
     }
 }

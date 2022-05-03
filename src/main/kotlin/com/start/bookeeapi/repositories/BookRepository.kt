@@ -9,4 +9,6 @@ import java.util.*
 interface BookRepository : JpaRepository<Book, UUID> {
 
     fun findByTitleContains(matchTitle: String): List<Book>
+
+    fun findAllByAuthorsId(id: UUID): List<Book>
 }
