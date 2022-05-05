@@ -12,8 +12,8 @@ class BookController(
 ) {
 
     @GetMapping
-    fun getAllBooks(@RequestParam maxResult: Int = 100, @RequestParam page: Int = 0): List<Book> {
-        return bookService.getAllBooks(maxResult, page)
+    fun getAllBooks(@RequestParam maxResult: Int?, @RequestParam page: Int?): List<Book> {
+        return bookService.getAllBooks(maxResult ?: 100, page ?: 0)
     }
 
     @GetMapping(path = ["/{id}/book"])
